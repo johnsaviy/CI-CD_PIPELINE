@@ -1,19 +1,18 @@
 version: 2.1
 
-jobs:
-  build:
-    docker:
-      - image: cimg/base:2020.01
+commands:
+  print_pipeline_id:
     steps:
-      - checkout
-      - run:
-          name: "echo an env var that is part of my project"
-          command: |
-            echo $MY_ENV_VAR
+      - run: echo ${CIRCLE_WORKFLOW_ID}
 
+jobs:
+  my_job:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - print_pipeline_id
 
 workflows:
-  test-env-vars:
+  my_workflow:
     jobs:
-      - build
-          
+      - my_job
