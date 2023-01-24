@@ -92,14 +92,25 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["92:62:b9:c4:1a:77:87:a3:72:c7:3d:5f:d2:2c:f1:ba"] # You can get this ID in the section where you registered the SSH Key
       - run:
-          name: Install dependencies
+
+          name: Install Ansible
           command: |
-            # install the dependencies needed for your playbook
+            # Install Ansible
             apk add --update ansible 
       - run:
           name: Configure server
           command: |
-            ansible-playbook -i inventory.txt main4.yml
+            ansible-playbook -i inventory.txt main3.yml
+            
+          # --------
+      #     name: Install dependencies
+      #     command: |
+      #       # install the dependencies needed for your playbook
+      #       apk add --update ansible 
+      # - run:
+      #     name: Configure server
+      #     command: |
+      #       ansible-playbook -i inventory.txt main4.yml
 
   # Exercise: Smoke Testing
   smoke_test:
@@ -221,7 +232,7 @@ workflows:
       #     requires:
       #       - upload_file
       - create_infrastructure
-      # - configure_infrastructure
+      - configure_infrastructure
       # - create_and_deploy_front_end
       # - promote_to_production:
       #     requires: 
