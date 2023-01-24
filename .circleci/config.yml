@@ -118,8 +118,8 @@ jobs:
       - image: alpine:latest
     steps:
       - run:
-          name: Test jon
-          command: return job
+          name: Test job
+          command: return 1
     # --------------
       # - run: apk add --update curl
       # - run:
